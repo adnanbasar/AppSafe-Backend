@@ -5,7 +5,12 @@ from datetime import datetime
 from enum import Enum
 from typing import List
 
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
+
+class AnimalEnum(Enum):
+	dog = 'dog'
+	cat = 'cat'
+	bird = 'bird'
 
 class BasePet(BaseModel):	
 	class Config:
@@ -16,6 +21,7 @@ class Pet(BasePet):
     name: str
     immage: str | None = None
     age_in_months: int
+    animal: AnimalEnum
     breed: str | None = None
     created_at: datetime
     updated_at: datetime
@@ -32,3 +38,4 @@ class PetIN(BasePet):
     immage: str | None = None
     age_in_months: int
     breed: str | None = None
+    animal: AnimalEnum
