@@ -19,7 +19,6 @@ async def get_pets(
     ret = [i async for i in ret]
     return paginate(ret, params)
 
-
 @router.post("/add", response_model=Pet)
 async def add_pet(
     petin: PetIN, 
@@ -28,7 +27,6 @@ async def add_pet(
     pet_ret = Pet(petID=str(uuid.uuid4()),created_at=datetime.now(),updated_at=datetime.now(),**petin.dict())
     await db.pets.insert_one(pet_ret.dict())
     return pet_ret
-
 
 @router.patch("/status-update/{petID}", response_model=Pet)
 async def update_pet(petID: str, petupdatestatus: PetStatusUpdate, db: AsyncIOMotorClient = Depends(get_database)):
