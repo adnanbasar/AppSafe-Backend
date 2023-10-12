@@ -14,14 +14,35 @@ class BaseUser(BaseModel):
         
 
 class User(BaseUser):
-    userID: int
+    userID: str
     profile_picture: str = None
     name: str
     role: str | None = None
     email: str | None = None
-    password: str | None = None
+    # hashed_password: str | None = None
     created_at: datetime
     updated_at: datetime
     deleted_at: datetime | None = None
     is_active: bool = True
     is_superuser: bool = False
+    adopted_petID: str | None = None
+
+
+class UserInDB(User):
+    hashed_password: str
+
+class UserIN(BaseUser):
+    name: str
+    role: str | None = None
+    email: str | None = None
+    password: str | None = None
+    is_active: bool = True
+    is_superuser: bool = False
+
+class Token(BaseModel):
+    access_token: str
+    token_type: str
+
+class TokenData(BaseModel):
+    username: str
+    # role: str | None = None
