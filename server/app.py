@@ -20,10 +20,10 @@ app = FastAPI(
     docs_url="/",
 )
 
+app.add_middleware(HTTPSRedirectMiddleware)
+app.add_middleware(TrustedHostMiddleware, allowed_hosts=ALLOWED_HOSTS)
 app.add_middleware(
     CORSMiddleware,
-    HTTPSRedirectMiddleware,
-    TrustedHostMiddleware,
 	allow_origins=ALLOWED_HOSTS,
 	allow_credentials=True,
 	allow_methods=["*"],
