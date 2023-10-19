@@ -15,7 +15,7 @@ class BaseUser(BaseModel):
 
 class User(BaseUser):
     userID: str
-    profile_picture: str = None
+    profile_picture: str = ""
     name: str
     role: str | None = None
     email: str | None = None
@@ -28,8 +28,6 @@ class User(BaseUser):
     adopted_petID: str | None = None
 
 
-class UserInDB(User):
-    hashed_password: str
 
 class UserIN(BaseUser):
     name: str
@@ -38,6 +36,9 @@ class UserIN(BaseUser):
     password: str | None = None
     is_active: bool = True
     is_superuser: bool = False
+class UserInDB(User):
+    hashed_password: str
+    salt : str = ""
 
 class Token(BaseModel):
     access_token: str
