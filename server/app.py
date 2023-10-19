@@ -3,6 +3,8 @@ from fastapi import FastAPI
 from .db import create_mongo_connection, close_mongo_connection
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.middleware.httpsredirect import HTTPSRedirectMiddleware
+from fastapi.middleware.trustedhost import TrustedHostMiddleware
 
 ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "").split(",")
 
@@ -20,6 +22,8 @@ app = FastAPI(
 
 app.add_middleware(
     CORSMiddleware,
+    HTTPSRedirectMiddleware,
+    TrustedHostMiddleware,
 	allow_origins=ALLOWED_HOSTS,
 	allow_credentials=True,
 	allow_methods=["*"],
